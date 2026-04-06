@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalwani Brothers – Luxury Wedding & Event Management</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
+            <li><a href="#gallery" onclick="closeMobileMenu()">Portfolio</a></li>
+            <li><a href="#testimonials" onclick="closeMobileMenu()">Stories</a></li>
+            <li><a href="#team" onclick="closeMobileMenu()">Team</a></li>
+            <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+        </ul>
+        <span class="mobile-menu-gold"></span>
+        <span class="mobile-menu-contact">+91 97845 86143 · Bhilwara, Rajasthan</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#">
+            <img src="logo2.png" class="nav-logo" alt="Lalwani Brothers Logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Portfolio</a></li>
+            <li><a href="#testimonials">Stories</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <svg class="hero-mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                stroke="#C9A84C">
+                <circle cx="200" cy="200" r="180" stroke-width="0.5" />
+                <circle cx="200" cy="200" r="140" stroke-width="0.5" />
+                <circle cx="200" cy="200" r="100" stroke-width="0.5" />
+                <circle cx="200" cy="200" r="60" stroke-width="0.5" />
+                <line x1="200" y1="20" x2="200" y2="380" stroke-width="0.5" />
+                <line x1="20" y1="200" x2="380" y2="200" stroke-width="0.5" />
+                <line x1="73" y1="73" x2="327" y2="327" stroke-width="0.5" />
+                <line x1="327" y1="73" x2="73" y2="327" stroke-width="0.5" />
+                <polygon points="200,30 370,110 370,290 200,370 30,290 30,110" stroke-width="0.5" />
+                <polygon points="200,60 340,130 340,270 200,340 60,270 60,130" stroke-width="0.5" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(0 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(45 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(90 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(135 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(180 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(225 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(270 200 200)" />
+                <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(315 200 200)" />
+            </svg>
+        </div>
+
+        <div class="hero-content">
+            <span class="hero-tagline">✦ Est. 2008 · Rajasthan's Premier Event House ✦</span>
+            <h1 class="hero-title">
+                <span>Lalwani</span>
+                <span>Brothers</span>
+            </h1>
+            <p class="hero-sub">Where Every Celebration Becomes Legend</p>
+            <div class="gold-rule"></div>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary"><span>Plan Your Event</span></a>
+                <a href="#gallery" class="btn-outline">View Portfolio</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section>
+        <div id="about">
+            <div class="about-visual reveal">
+                <div class="about-frame">
+                    <div class="about-frame-inner">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C9A84C"
+                            stroke-width="0.8">
+                            <circle cx="100" cy="100" r="90" />
+                            <circle cx="100" cy="100" r="70" />
+                            <circle cx="100" cy="100" r="50" />
+                            <circle cx="100" cy="100" r="30" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(30 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(60 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(90 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(120 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(150 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(180 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(210 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(240 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(270 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(300 100 100)" />
+                            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(330 100 100)" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="about-badge">
+                    <span class="num">15+</span>
+                    <span class="txt">Years of<br>Excellence</span>
+                </div>
+            </div>
+
+            <div class="about-text">
+                <span class="section-label reveal">Our Story</span>
+                <h2 class="section-title reveal reveal-delay-1">
+                    Crafting <em>Unforgettable</em><br>Moments Since 2008
+                </h2>
+                <p class="reveal reveal-delay-2">Lalwani Brothers was born from a singular vision — to transform life's
+                    most precious celebrations into extraordinary experiences. Founded in Rajasthan, we carry the
+                    grandeur of India's royal heritage into every event we create.</p>
+                <p class="reveal reveal-delay-3">From intimate destination weddings to grand royal celebrations, our
+                    team of passionate artisans, decorators, and event architects orchestrate every detail with
+                    unmatched precision and artistic excellence.</p>
+
+                <div class="stats-row reveal reveal-delay-4">
+                    <div class="stat"><span class="n">500+</span><span class="l">Events</span></div>
+                    <div class="stat"><span class="n">98%</span><span class="l">Satisfied</span></div>
+                    <div class="stat"><span class="n">12</span><span class="l">Cities</span></div>
+                    <div class="stat"><span class="n">50+</span><span class="l">Team</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="services-header">
+            <span class="section-label reveal">What We Offer</span>
+            <h2 class="section-title reveal reveal-delay-1">Our <em>Signature</em> Services</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <span class="service-num">01</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M24 4C24 4 10 14 10 24a14 14 0 0028 0C38 14 24 4 24 4z" />
+                    <path d="M24 20l2.5 5 5.5.8-4 3.9.9 5.5L24 32.5l-4.9 2.7.9-5.5-4-3.9 5.5-.8z" />
+                </svg>
+                <h3 class="service-name">Royal Wedding Planning</h3>
+                <p class="service-desc">End-to-end wedding management that transforms your dreams into a magnificent
+                    royal celebration. From venue selection to final farewell.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <span class="service-num">02</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="6" y="14" width="36" height="28" rx="2" />
+                    <path d="M16 14V10a8 8 0 0116 0v4" />
+                    <circle cx="24" cy="28" r="4" />
+                    <path d="M24 32v6" />
+                </svg>
+                <h3 class="service-name">Luxury Decoration</h3>
+                <p class="service-desc">Breathtaking floral artistry, draping, lighting design and themed décor that
+                    transforms any venue into a palace of dreams.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <span class="service-num">03</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M8 40V20l16-12 16 12v20" />
+                    <rect x="18" y="28" width="12" height="12" />
+                    <path d="M14 28h4M30 28h4M14 20h4M30 20h4" />
+                </svg>
+                <h3 class="service-name">Destination Weddings</h3>
+                <p class="service-desc">We curate extraordinary destination weddings across Rajasthan's majestic forts,
+                    palaces, and heritage havens.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <span class="service-num">04</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="24" cy="24" r="18" />
+                    <path d="M24 14v10l6 6" />
+                    <path d="M14 24h4M30 24h4M24 14v4M24 30v4" />
+                </svg>
+                <h3 class="service-name">Mehendi & Sangeet</h3>
+                <p class="service-desc">Vibrant, culturally rich pre-wedding ceremonies with live entertainment, bespoke
+                    stage designs, and traditional elegance.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <span class="service-num">05</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 36l8-8 8 8 8-8 8 8 8-8" />
+                    <path d="M12 28V16M20 28V12M28 28V18M36 28V8" />
+                </svg>
+                <h3 class="service-name">Entertainment & Artists</h3>
+                <p class="service-desc">Curated live performances — folk artists, DJs, orchestras, celebrity performers,
+                    and fireworks to electrify your celebration.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <span class="service-num">06</span>
+                <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="24" cy="20" r="8" />
+                    <path d="M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16" />
+                    <path d="M34 12l4 4M14 12l-4 4" />
+                </svg>
+                <h3 class="service-name">Hospitality & Guest Care</h3>
+                <p class="service-desc">Premium hospitality management — from airport transfers to luxury
+                    accommodations, ensuring every guest feels royally treated.</p>
+                <span class="service-arrow">Discover More →</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <div class="gallery-header">
+            <span class="section-label reveal">Our Portfolio</span>
+            <h2 class="section-title reveal reveal-delay-1">Moments We've <em>Crafted</em></h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <div class="gallery-inner"><img src="portfolio/01 gwc.jpeg" alt="Grand Wedding Ceremony"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Grand Wedding Ceremony</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1">
+                <div class="gallery-inner"><img src="portfolio/02 sn.jpeg" alt="Sangeet Night"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Sangeet Night</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2">
+                <div class="gallery-inner"><img src="portfolio/03 barat.jpeg" alt="Baraat Procession"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Baraat Procession</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1">
+                <div class="gallery-inner"><img src="portfolio/04 mandap.jpeg" alt="Mandap Decoration"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Mandap Decoration</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2">
+                <div class="gallery-inner"><img src="portfolio/05 haldi.jpeg" alt="Haldi Carnival"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Haldi Carnival</span></div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-3">
+                <div class="gallery-inner"><img src="portfolio/06 recpetion.jpeg" alt="Reception Gala"></div>
+                <div class="gallery-overlay"><span class="gallery-label">✦ Reception Gala</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="testimonials-header">
+            <span class="section-label reveal">Love Stories</span>
+            <h2 class="section-title reveal reveal-delay-1">What Our Families <em>Say</em></h2>
+        </div>
+        <div class="testimonials-track">
+            <div class="testimonial-card reveal">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">Lalwani Brothers turned our wedding into an absolute fairytale. Every single
+                    detail was perfect — the flowers, the lighting, the coordination. Our guests are still talking about
+                    it months later!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RS</div>
+                    <div>
+                        <span class="author-name">Riya & Sahil Mehta</span>
+                        <span class="author-event">Grand Wedding · Jaipur, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-1">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">We wanted a destination wedding at a palace and Lalwani Brothers made it
+                    happen beyond our dreams. Professional, creative, and they truly understand the meaning of luxury.
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">PA</div>
+                    <div>
+                        <span class="author-name">Priya & Arjun Sharma</span>
+                        <span class="author-event">Palace Wedding · Udaipur, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-2">
+                <span class="quote-mark">"</span>
+                <p class="testimonial-text">From the very first meeting, we knew we were in the right hands. The sangeet
+                    night was electrifying and our wedding day was nothing short of magical. Highly recommend!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">NK</div>
+                    <div>
+                        <span class="author-name">Neha & Karan Gupta</span>
+                        <span class="author-event">Royal Wedding · Jodhpur, 2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+        <div class="team-header">
+            <span class="section-label reveal">The People Behind The Magic</span>
+            <h2 class="section-title reveal reveal-delay-1">Who <em>We Are</em></h2>
+        </div>
+        <div class="team-grid">
+
+            <div class="team-card reveal">
+                <div class="team-photo">
+                    <img src="team/Nidhi.png" alt="Nidhi Maheshwari">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Nidhi Maheshwari</div>
+                    <div class="team-role">Event Stylist</div>
+                    <p class="team-quote">
+                        "Our vision is to craft an aura so enchanting, it leaves an everlasting imprint on every heart
+                        it touches."
+                        <span class="team-quote-attr">~ Event Stylist</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card reveal reveal-delay-1">
+                <div class="team-photo">
+                    <img src="team/Ashok Bhaiya.png" alt="Ashok Lalwani">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Ashok Lalwani</div>
+                    <div class="team-role">Founder</div>
+                    <p class="team-quote">
+                        "Our clients are at the heart of everything we do — their satisfaction is our greatest pride."
+                        <span class="team-quote-attr">~ Founder</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="team-card reveal reveal-delay-2">
+                <div class="team-photo">
+                    <img src="team/Anil Bhaiya.png" alt="Anil Lalwani">
+                </div>
+                <div class="team-info">
+                    <div class="team-name">Anil Lalwani</div>
+                    <div class="team-role">Co-Founder</div>
+                    <p class="team-quote">
+                        "Excellence is our signature — delivering the very best is what sets us apart."
+                        <span class="team-quote-attr">~ Co-Founder</span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section>
+        <div id="why">
+            <div>
+                <span class="section-label reveal">Why Choose Us</span>
+                <h2 class="section-title reveal reveal-delay-1">The <em>Lalwani</em><br>Difference</h2>
+                <div class="why-features">
+                    <div class="why-feature reveal reveal-delay-1">
+                        <span class="why-num">01</span>
+                        <div class="why-content">
+                            <h4>Legacy of Excellence</h4>
+                            <p>Over 15 years and 500+ events have sharpened our craft to an art form. We don't just plan
+                                events — we architect memories.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature reveal reveal-delay-2">
+                        <span class="why-num">02</span>
+                        <div class="why-content">
+                            <h4>Bespoke Every Time</h4>
+                            <p>No two weddings are alike. Each event is designed uniquely from the ground up, reflecting
+                                your personality and vision.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature reveal reveal-delay-3">
+                        <span class="why-num">03</span>
+                        <div class="why-content">
+                            <h4>Seamless Execution</h4>
+                            <p>Our dedicated team ensures flawless coordination on your big day so you can be fully
+                                present in every precious moment.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature reveal reveal-delay-4">
+                        <span class="why-num">04</span>
+                        <div class="why-content">
+                            <h4>Trusted Vendor Network</h4>
+                            <p>Curated partnerships with Rajasthan's finest caterers, photographers, artists and vendors
+                                for unbeatable quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="why-visual reveal reveal-delay-2">
+                <div class="diamond-grid">
+                    <div class="diamond-cell"><span class="icon">💐</span><span>Floral Design</span></div>
+                    <div class="diamond-cell"><span class="icon">✨</span><span>Lighting</span></div>
+                    <div class="diamond-cell"><span class="icon">🎭</span><span>Entertainment</span></div>
+                    <div class="diamond-cell"><span class="icon">🍽️</span><span>Fine Dining</span></div>
+                    <div class="diamond-cell"><span class="icon">📸</span><span>Photography</span></div>
+                    <div class="diamond-cell"><span class="icon">🚗</span><span>Logistics</span></div>
+                    <div class="diamond-cell"><span class="icon">🎪</span><span>Venue Styling</span></div>
+                    <div class="diamond-cell"><span class="icon">👑</span><span>Royal Décor</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-inner">
+            <span class="section-label reveal">Get In Touch</span>
+            <h2 class="section-title reveal reveal-delay-1">Let's Create Your<br><em>Dream Wedding</em></h2>
+            <p class="reveal reveal-delay-2">Tell us about your vision and we'll craft something extraordinary together.
+            </p>
+
+            <form id="contactForm">
+
+                <div class="contact-form reveal reveal-delay-3">
+
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" name="phone" placeholder="+91 00000 00000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Event Type</label>
+                        <select name="event" required>
+                            <option value="">Select Event</option>
+                            <option>Grand Wedding</option>
+                            <option>Destination Wedding</option>
+                            <option>Sangeet / Mehendi</option>
+                            <option>Reception</option>
+                            <option>Engagement</option>
+                            <option>Other Event</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expected Date</label>
+                        <input type="date" name="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Expected Guests</label>
+                        <select name="guests">
+                            <option value="">Guest Count</option>
+                            <option>50 – 100</option>
+                            <option>100 – 300</option>
+                            <option>300 – 500</option>
+                            <option>500 – 1000</option>
+                            <option>1000+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label>Your Vision</label>
+                        <textarea name="message" placeholder="Tell us about your dream event..."></textarea>
+                    </div>
+
+                </div>
+
+                <div style="margin-top:12px;">
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span>Send Enquiry ✦</span>
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="contact-info reveal">
+                <div class="contact-item">
+                    <span class="ci-label">📞 Call Us</span>
+                    <a href="tel:+919784586143" class="ci-value">+91 97845 86143</a>
+                </div>
+                <div class="contact-item">
+                    <span class="ci-label">✉ Email</span>
+                    <a href="/cdn-cgi/l/email-protection#3677455e595d5a575a4157585f07000176515b575f5a1855595b"
+                        class="ci-value"><span class="__cf_email__"
+                            data-cfemail="9fdeecf7f0f4f3fef3e8fef1f6aea9a8dff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></a>
+                </div>
+                <div class="contact-item">
+                    <span class="ci-label">📍 Location</span>
+                    <span class="ci-value">Bhilwara, Rajasthan</span>
+                </div>
+                <div class="contact-item">
+                    <span class="ci-label">🕐 Hours</span>
+                    <span class="ci-value">Mon – Sun, 9am – 9pm</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <img src="logo2.png" style="height: 46px; width: auto;" alt="Lalwani Brothers Logo">
+        <p>© 2025 Lalwani Brothers. All Rights Reserved. Crafted with ♥ in Rajasthan.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

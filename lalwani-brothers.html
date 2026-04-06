@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lalwani Brothers – Luxury Wedding & Event Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96A;
+    --gold-pale: #f0d98b;
+    --gold-dim: #8a6e2f;
+    --black: #080808;
+    --black-soft: #111111;
+    --black-card: #0e0e0e;
+    --white: #f5f0e8;
+    --text-muted: #8a7d62;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; max-width: 100%; }
+  html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+  }
+
+  /* ── Custom cursor (desktop only) ── */
+  .cursor, .cursor-ring { display: none; }
+  @media (pointer: fine) {
+    .cursor {
+      display: block;
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      display: block;
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.35s cubic-bezier(.25,.46,.45,.94);
+      opacity: 0.6;
+    }
+    body { cursor: none; }
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ───── NAVBAR ───── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 500;
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.5s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(8,8,8,0.97);
+    backdrop-filter: blur(12px);
+    padding: 14px 60px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: opacity 0.3s;
+    position: relative;
+    z-index: 600;
+  }
+  .nav-logo:hover { opacity: 0.85; }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+    opacity: 0.8;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.35s ease;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 600;
+    position: relative;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px; height: 1.5px;
+    background: var(--gold);
+    margin: 6px 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,8,0.98);
+    backdrop-filter: blur(20px);
+    z-index: 400;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mobile-menu ul {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mobile-menu ul li a {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 14px 40px;
+    position: relative;
+    transition: color 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: color 0.3s, opacity 0.4s ease, transform 0.4s ease;
+  }
+  .mobile-menu.open ul li a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .mobile-menu.open ul li:nth-child(1) a { transition-delay: 0.1s; }
+  .mobile-menu.open ul li:nth-child(2) a { transition-delay: 0.15s; }
+  .mobile-menu.open ul li:nth-child(3) a { transition-delay: 0.2s; }
+  .mobile-menu.open ul li:nth-child(4) a { transition-delay: 0.25s; }
+  .mobile-menu.open ul li:nth-child(5) a { transition-delay: 0.3s; }
+  .mobile-menu.open ul li:nth-child(6) a { transition-delay: 0.35s; }
+  .mobile-menu ul li a:hover { color: var(--gold); }
+  .mobile-menu-gold {
+    display: block;
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 30px auto;
+  }
+  .mobile-menu-contact {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.35s;
+  }
+  .mobile-menu.open .mobile-menu-contact { opacity: 1; }
+
+  /* ───── HERO ───── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 20px;
+    width: 100%;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.08);
+    animation: pulse-ring 8s ease-in-out infinite;
+  }
+  .circle:nth-child(1) { width: 600px; height: 600px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 0s; }
+  .circle:nth-child(2) { width: 900px; height: 900px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 1.5s; border-color: rgba(201,168,76,0.05); }
+  .circle:nth-child(3) { width: 1200px; height: 1200px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: 3s; border-color: rgba(201,168,76,0.03); }
+  @keyframes pulse-ring {
+    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%,-50%) scale(1.04); opacity: 0.5; }
+  }
+  .hero-mandala {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 500px; height: 500px;
+    opacity: 0.06;
+    animation: spin-slow 120s linear infinite;
+  }
+  @keyframes spin-slow { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .hero-content { position: relative; z-index: 2; width: 100%; }
+  .hero-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.5rem, 2vw, 0.65rem);
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+  }
+  .hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 12vw, 7.5rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.7s forwards;
+  }
+  .hero-title span {
+    display: block;
+    background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 40%, var(--gold-pale) 60%, var(--gold) 80%, var(--gold-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.95rem, 3vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-top: 16px;
+    opacity: 0;
+    animation: fadeUp 1.2s 1s forwards;
+  }
+  .gold-rule {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 24px auto;
+    opacity: 0;
+    animation: fadeIn 1.2s 1.3s forwards;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    padding: 0 20px;
+    opacity: 0;
+    animation: fadeUp 1.2s 1.5s forwards;
+  }
+  .btn-primary {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.55rem, 2vw, 0.65rem);
+    letter-spacing: 2px;
+    padding: 15px 32px;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-light));
+    color: var(--black);
+    border: none;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-pale));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover, .btn-primary:active { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.3); }
+  .btn-primary:hover::before { opacity: 1; }
+  .btn-primary span { position: relative; z-index: 1; }
+  .btn-outline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.55rem, 2vw, 0.65rem);
+    letter-spacing: 2px;
+    padding: 14px 32px;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-outline:hover, .btn-outline:active { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1.5s 2s forwards;
+  }
+  .scroll-indicator span { font-size: 0.5rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scroll-anim 2s ease-in-out infinite;
+  }
+  @keyframes scroll-anim {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ───── SECTION BASE ───── */
+  section { padding: 100px 60px; width: 100%; overflow: hidden; }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--white);
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ───── ABOUT ───── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .about-visual { position: relative; }
+  .about-frame {
+    width: 100%; aspect-ratio: 3/4;
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.15);
+    position: relative; overflow: hidden;
+  }
+  .about-frame-inner {
+    position: absolute; inset: 16px;
+    border: 1px solid rgba(201,168,76,0.1);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-frame-inner svg { width: 80%; opacity: 0.15; }
+  .about-badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 120px; height: 120px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--black);
+    font-family: 'Cinzel', serif;
+  }
+  .about-badge .num { font-size: 2rem; font-weight: 700; line-height: 1; }
+  .about-badge .txt { font-size: 0.45rem; letter-spacing: 1.5px; text-align: center; line-height: 1.5; }
+  .about-text p { font-size: 0.9rem; line-height: 1.9; color: var(--text-muted); margin-top: 24px; }
+  .about-text p + p { margin-top: 14px; }
+  .stats-row {
+    display: flex;
+    gap: 24px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; flex: 1; min-width: 70px; }
+  .stat .n { font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 600; color: var(--gold); display: block; }
+  .stat .l { font-size: 0.58rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); display: block; margin-top: 4px; }
+
+  /* ───── SERVICES ───── */
+  #services {
+    background: var(--black-soft);
+    border-top: 1px solid rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .services-header { text-align: center; max-width: 700px; margin: 0 auto 70px; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: var(--black-card);
+    padding: 44px 36px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+    border: 1px solid rgba(201,168,76,0.05);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0); transition: transform 0.5s ease;
+  }
+  .service-card:hover { background: rgba(201,168,76,0.03); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 3px; color: rgba(201,168,76,0.4); margin-bottom: 20px; display: block; }
+  .service-icon { width: 44px; height: 44px; margin-bottom: 20px; color: var(--gold); opacity: 0.8; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); margin-bottom: 14px; line-height: 1.2; }
+  .service-desc { font-size: 0.8rem; line-height: 1.9; color: var(--text-muted); }
+  .service-arrow { display: inline-block; margin-top: 20px; font-size: 0.62rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; transition: letter-spacing 0.3s; }
+  .service-card:hover .service-arrow { letter-spacing: 4px; }
+
+  /* ───── GALLERY ───── */
+  #gallery { max-width: 1400px; width: 100%; margin: 0 auto; }
+  .gallery-header { text-align: center; margin-bottom: 60px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+    width: 100%;
+  }
+  .gallery-item {
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.1);
+    overflow: hidden; position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .gallery-item:nth-child(1) { grid-column: 1 / 7; grid-row: 1; aspect-ratio: 4/3; }
+  .gallery-item:nth-child(2) { grid-column: 7 / 10; grid-row: 1; aspect-ratio: 3/4; }
+  .gallery-item:nth-child(3) { grid-column: 10 / 13; grid-row: 1; aspect-ratio: 3/4; }
+  .gallery-item:nth-child(4) { grid-column: 1 / 4; grid-row: 2; aspect-ratio: 3/4; }
+  .gallery-item:nth-child(5) { grid-column: 4 / 8; grid-row: 2; aspect-ratio: 4/3; }
+  .gallery-item:nth-child(6) { grid-column: 8 / 13; grid-row: 2; aspect-ratio: 4/3; }
+  .gallery-inner {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--black-card);
+    transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+  }
+  .gallery-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-item:hover .gallery-inner { transform: scale(1.04); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.8) 0%, transparent 60%);
+    display: flex; align-items: flex-end;
+    padding: 20px; opacity: 0; transition: opacity 0.4s;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+
+  /* ───── TESTIMONIALS ───── */
+  #testimonials {
+    background: var(--black-soft);
+    border-top: 1px solid rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .testimonials-header { text-align: center; margin-bottom: 70px; }
+  .testimonials-track { display: flex; gap: 28px; max-width: 1300px; width: 100%; margin: 0 auto; }
+  .testimonial-card {
+    flex: 1;
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 44px 36px;
+    position: relative;
+    transition: border-color 0.4s;
+    cursor: pointer;
+  }
+  .testimonial-card:hover { border-color: rgba(201,168,76,0.3); }
+  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold); opacity: 0.15; line-height: 0.5; display: block; margin-bottom: 14px; }
+  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-style: italic; font-weight: 300; line-height: 1.8; color: var(--white); opacity: 0.85; }
+  .testimonial-author { margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(201,168,76,0.1); display: flex; align-items: center; gap: 14px; }
+  .author-avatar { width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-dim), var(--gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--black); font-weight: 600; flex-shrink: 0; }
+  .author-name { font-family: 'Cinzel', serif; font-size: 0.68rem; letter-spacing: 1px; color: var(--gold); display: block; }
+  .author-event { font-size: 0.62rem; letter-spacing: 1px; color: var(--text-muted); display: block; margin-top: 3px; }
+
+  /* ───── WHY US ───── */
+  #why { max-width: 1300px; width: 100%; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .why-features { margin-top: 44px; display: flex; flex-direction: column; gap: 0; }
+  .why-feature { display: flex; gap: 22px; padding: 28px 0; border-bottom: 1px solid rgba(201,168,76,0.08); cursor: pointer; }
+  .why-feature:first-child { border-top: 1px solid rgba(201,168,76,0.08); }
+  .why-num { font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; flex-shrink: 0; padding-top: 4px; }
+  .why-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+  .why-content p { font-size: 0.8rem; line-height: 1.8; color: var(--text-muted); }
+  .why-visual { position: sticky; top: 100px; }
+  .diamond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .diamond-cell { aspect-ratio: 1; background: var(--black-card); border: 1px solid rgba(201,168,76,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; transition: border-color 0.4s, background 0.4s; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .diamond-cell:hover, .diamond-cell:active { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.03); }
+  .diamond-cell .icon { font-size: 1.8rem; }
+  .diamond-cell span { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; text-align: center; padding: 0 10px; }
+
+  /* ───── CONTACT ───── */
+  #contact {
+    text-align: center;
+    background: var(--black-soft);
+    border-top: 1px solid rgba(201,168,76,0.08);
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: 'LALWANI';
+    position: absolute; bottom: -40px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 20vw; font-weight: 700;
+    color: rgba(201,168,76,0.02);
+    white-space: nowrap; pointer-events: none;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .contact-inner { max-width: 700px; width: 100%; margin: 0 auto; position: relative; z-index: 2; }
+  .contact-inner p { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-style: italic; font-weight: 300; color: var(--text-muted); margin: 26px 0 44px; line-height: 1.8; }
+  .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; margin-bottom: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.58rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-family: 'Cinzel', serif; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.15);
+    color: var(--white);
+    padding: 13px 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem; font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  .form-group select option { background: var(--black); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .contact-info { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-top: 70px; padding-top: 50px; border-top: 1px solid rgba(201,168,76,0.1); }
+  .contact-item { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+  .contact-item .ci-label { font-family: 'Cinzel', serif; font-size: 0.53rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+  .contact-item .ci-value { font-size: 0.85rem; color: var(--white); text-decoration: none; transition: color 0.3s; }
+  .contact-item a:hover { color: var(--gold); }
+
+  /* ───── TEAM ───── */
+  #team {
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+  .team-header { text-align: center; margin-bottom: 70px; }
+  .team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .team-card {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.1);
+    overflow: hidden;
+    transition: border-color 0.4s;
+    position: relative;
+  }
+  .team-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    transform: scaleY(0);
+    transition: transform 0.5s ease;
+  }
+  .team-card:hover { border-color: rgba(201,168,76,0.3); }
+  .team-card:hover::before { transform: scaleY(1); }
+  .team-photo {
+    width: 100%; height: 100%; min-height: 240px;
+    overflow: hidden; position: relative;
+  }
+  .team-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    display: block;
+    transition: transform 0.6s cubic-bezier(.25,.46,.45,.94);
+    filter: grayscale(15%);
+  }
+  .team-card:hover .team-photo img { transform: scale(1.05); filter: grayscale(0%); }
+  .team-info {
+    padding: 36px 44px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+  .team-info::before {
+    content: '"';
+    position: absolute; top: 8px; right: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem; color: var(--gold); opacity: 0.06; line-height: 1;
+  }
+  .team-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 2px; margin-bottom: 4px;
+  }
+  .team-role {
+    font-family: 'Cinzel', serif;
+    font-size: 0.54rem; letter-spacing: 3px;
+    color: var(--text-muted); text-transform: uppercase;
+    margin-bottom: 20px; padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+  .team-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic;
+    font-weight: 300; line-height: 1.75;
+    color: var(--white); opacity: 0.82; position: relative; z-index: 1;
+  }
+  .team-quote-attr {
+    display: block; margin-top: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.54rem; letter-spacing: 2px;
+    color: var(--gold); opacity: 0.6;
+  }
+
+  /* ───── FOOTER ───── */
+  footer { padding: 26px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(201,168,76,0.08); }
+  .footer-brand { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 600; color: var(--gold); letter-spacing: 3px; }
+  footer p { font-size: 0.62rem; letter-spacing: 1.5px; color: var(--text-muted); }
+
+  /* ───── REVEAL ANIMATIONS ───── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ══════════════════════════════════
+     TABLET (max-width: 1024px)
+  ══════════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 30px; }
+    nav.scrolled { padding: 14px 30px; }
+    section { padding: 80px 30px; }
+    #about { grid-template-columns: 1fr; gap: 60px; }
+    #about .about-visual { max-width: 320px; margin: 0 auto; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    #why { grid-template-columns: 1fr; gap: 50px; }
+    .why-visual { position: static; }
+    .gallery-item:nth-child(1) { grid-column: 1 / 13; }
+    .gallery-item:nth-child(2) { grid-column: 1 / 7; }
+    .gallery-item:nth-child(3) { grid-column: 7 / 13; }
+    .gallery-item:nth-child(4) { grid-column: 1 / 7; }
+    .gallery-item:nth-child(5) { grid-column: 7 / 13; }
+    .gallery-item:nth-child(6) { grid-column: 1 / 13; }
+    .testimonials-track { flex-direction: column; gap: 20px; }
+  }
+
+  /* ══════════════════════════════════
+     MOBILE (max-width: 768px)
+  ══════════════════════════════════ */
+  @media (max-width: 768px) {
+    body { cursor: auto; }
+
+    /* Nav */
+    nav { padding: 14px 16px; }
+    nav.scrolled { padding: 12px 16px; }
+    .nav-logo { height: 40px; }
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .mobile-menu { display: flex; }
+
+    /* Hero */
+    #hero { padding: 0 16px; }
+    .hero-tagline { letter-spacing: 2px; margin-bottom: 14px; font-size: 0.5rem; }
+    .hero-sub { letter-spacing: 1px; font-size: 0.9rem; }
+    .hero-cta { gap: 10px; padding: 0; flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { padding: 14px 24px; font-size: 0.58rem; letter-spacing: 1.5px; width: 100%; max-width: 240px; text-align: center; display: block; }
+    .scroll-indicator { bottom: 16px; }
+    .hero-mandala { width: 240px; height: 240px; }
+    .circle:nth-child(1) { width: 260px; height: 260px; }
+    .circle:nth-child(2) { width: 400px; height: 400px; }
+    .circle:nth-child(3) { width: 560px; height: 560px; }
+
+    /* Sections */
+    section { padding: 60px 16px; }
+
+    /* About */
+    #about { gap: 40px; }
+    #about .about-visual { max-width: 220px; }
+    .about-badge { width: 90px; height: 90px; bottom: -14px; right: -14px; }
+    .about-badge .num { font-size: 1.4rem; }
+    .about-text p { font-size: 0.83rem; margin-top: 16px; }
+    .stats-row { gap: 12px; margin-top: 28px; padding-top: 20px; justify-content: center; }
+    .stat { min-width: 55px; }
+    .stat .n { font-size: 1.4rem; }
+    .stat .l { font-size: 0.5rem; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 2px; }
+    .services-header { margin-bottom: 44px; }
+    .service-card { padding: 30px 20px; }
+    .service-icon { width: 36px; height: 36px; }
+
+    /* Gallery */
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; }
+    .gallery-item { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 1 !important; }
+    .gallery-item:nth-child(1) { grid-column: 1 / 3 !important; aspect-ratio: 16/9 !important; }
+    .gallery-header { margin-bottom: 36px; }
+
+    /* Testimonials */
+    #testimonials { padding: 60px 16px; }
+    .testimonials-header { margin-bottom: 44px; }
+    .testimonial-card { padding: 28px 18px; }
+    .testimonial-text { font-size: 1rem; }
+
+    /* Why */
+    #why { gap: 36px; }
+    .why-features { margin-top: 26px; }
+    .why-feature { gap: 14px; padding: 20px 0; }
+    .diamond-grid { grid-template-columns: repeat(4, 1fr); }
+    .diamond-cell { aspect-ratio: 1; }
+    .diamond-cell .icon { font-size: 1.3rem; }
+    .diamond-cell span { font-size: 0.46rem; letter-spacing: 0.8px; padding: 0 4px; }
+
+    /* Contact */
+    #contact { padding: 60px 16px; }
+    .contact-form { grid-template-columns: 1fr; gap: 10px; }
+    .contact-info { flex-direction: column; gap: 20px; align-items: center; margin-top: 44px; padding-top: 36px; }
+    .contact-inner p { font-size: 1rem; margin: 16px 0 28px; }
+
+    /* Footer */
+    footer { flex-direction: column; gap: 10px; text-align: center; padding: 20px 16px; }
+    footer img { height: 36px !important; }
+
+    /* Team */
+    .team-header { margin-bottom: 44px; }
+    .team-card { grid-template-columns: 1fr; }
+    .team-photo { min-height: 220px; max-height: 260px; }
+    .team-info { padding: 24px 20px; }
+    .team-name { font-size: 1.05rem; }
+    .team-quote { font-size: 0.95rem; }
+  }
+
+  /* ══════════════════════════════════
+     SMALL MOBILE (max-width: 480px)
+  ══════════════════════════════════ */
+  @media (max-width: 480px) {
+    .hero-title { letter-spacing: 1.5px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .gallery-item { grid-column: auto !important; aspect-ratio: 1 !important; }
+    .gallery-item:nth-child(1) { grid-column: 1 / 3 !important; aspect-ratio: 16/9 !important; }
+    .diamond-grid { grid-template-columns: repeat(4, 1fr); }
+    .contact-info { gap: 18px; }
+    section { padding: 56px 14px; }
+    .section-title { font-size: 1.8rem; }
+    .service-card { padding: 26px 16px; }
+    .testimonial-card { padding: 24px 14px; }
+  }
+
+  /* ══════════════════════════════════
+     360px PHONES (extra small)
+  ══════════════════════════════════ */
+  @media (max-width: 360px) {
+    nav { padding: 12px 12px; }
+    .nav-logo { height: 34px; }
+    section { padding: 50px 12px; }
+    .hero-title { font-size: 2.4rem; letter-spacing: 1px; }
+    .hero-tagline { font-size: 0.45rem; letter-spacing: 1.5px; }
+    .hero-sub { font-size: 0.82rem; }
+    .btn-primary, .btn-outline { max-width: 220px; padding: 13px 18px; font-size: 0.54rem; }
+    .about-badge { width: 80px; height: 80px; bottom: -12px; right: -12px; }
+    .about-badge .num { font-size: 1.2rem; }
+    .stat .n { font-size: 1.2rem; }
+    .stat .l { font-size: 0.46rem; }
+    .service-card { padding: 22px 14px; }
+    .service-name { font-size: 1.3rem; }
+    .testimonial-card { padding: 20px 12px; }
+    .testimonial-text { font-size: 0.95rem; }
+    .why-content h4 { font-size: 1.05rem; }
+    .diamond-cell .icon { font-size: 1.1rem; }
+    .diamond-cell span { font-size: 0.4rem; }
+    .contact-form { gap: 8px; }
+    .form-group input, .form-group select, .form-group textarea { padding: 11px 12px; font-size: 0.78rem; }
+    footer { padding: 16px 12px; }
+    footer p { font-size: 0.55rem; }
+    .section-title { font-size: 1.65rem; }
+    .gallery-grid { gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+    <li><a href="#services" onclick="closeMobileMenu()">Services</a></li>
+    <li><a href="#gallery" onclick="closeMobileMenu()">Portfolio</a></li>
+    <li><a href="#testimonials" onclick="closeMobileMenu()">Stories</a></li>
+    <li><a href="#team" onclick="closeMobileMenu()">Team</a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+  </ul>
+  <span class="mobile-menu-gold"></span>
+  <span class="mobile-menu-contact">+91 97845 86143 · Bhilwara, Rajasthan</span>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#">
+    <img src="logo2.png" class="nav-logo" alt="Lalwani Brothers Logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#testimonials">Stories</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <svg class="hero-mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C9A84C">
+      <circle cx="200" cy="200" r="180" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="140" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="100" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="60" stroke-width="0.5"/>
+      <line x1="200" y1="20" x2="200" y2="380" stroke-width="0.5"/>
+      <line x1="20" y1="200" x2="380" y2="200" stroke-width="0.5"/>
+      <line x1="73" y1="73" x2="327" y2="327" stroke-width="0.5"/>
+      <line x1="327" y1="73" x2="73" y2="327" stroke-width="0.5"/>
+      <polygon points="200,30 370,110 370,290 200,370 30,290 30,110" stroke-width="0.5"/>
+      <polygon points="200,60 340,130 340,270 200,340 60,270 60,130" stroke-width="0.5"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(0 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(45 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(90 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(135 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(180 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(225 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(270 200 200)"/>
+      <ellipse cx="200" cy="120" rx="20" ry="50" stroke-width="0.5" transform="rotate(315 200 200)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-tagline">✦ Est. 2008 · Rajasthan's Premier Event House ✦</span>
+    <h1 class="hero-title">
+      <span>Lalwani</span>
+      <span>Brothers</span>
+    </h1>
+    <p class="hero-sub">Where Every Celebration Becomes Legend</p>
+    <div class="gold-rule"></div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary"><span>Plan Your Event</span></a>
+      <a href="#gallery" class="btn-outline">View Portfolio</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div id="about">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-frame-inner">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C9A84C" stroke-width="0.8">
+            <circle cx="100" cy="100" r="90"/>
+            <circle cx="100" cy="100" r="70"/>
+            <circle cx="100" cy="100" r="50"/>
+            <circle cx="100" cy="100" r="30"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(30 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(60 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(90 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(120 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(150 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(210 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(240 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(270 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(300 100 100)"/>
+            <ellipse cx="100" cy="40" rx="12" ry="30" transform="rotate(330 100 100)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about-badge">
+        <span class="num">15+</span>
+        <span class="txt">Years of<br>Excellence</span>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <span class="section-label reveal">Our Story</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        Crafting <em>Unforgettable</em><br>Moments Since 2008
+      </h2>
+      <p class="reveal reveal-delay-2">Lalwani Brothers was born from a singular vision — to transform life's most precious celebrations into extraordinary experiences. Founded in Rajasthan, we carry the grandeur of India's royal heritage into every event we create.</p>
+      <p class="reveal reveal-delay-3">From intimate destination weddings to grand royal celebrations, our team of passionate artisans, decorators, and event architects orchestrate every detail with unmatched precision and artistic excellence.</p>
+
+      <div class="stats-row reveal reveal-delay-4">
+        <div class="stat"><span class="n">500+</span><span class="l">Events</span></div>
+        <div class="stat"><span class="n">98%</span><span class="l">Satisfied</span></div>
+        <div class="stat"><span class="n">12</span><span class="l">Cities</span></div>
+        <div class="stat"><span class="n">50+</span><span class="l">Team</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <span class="section-label reveal">What We Offer</span>
+    <h2 class="section-title reveal reveal-delay-1">Our <em>Signature</em> Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M24 4C24 4 10 14 10 24a14 14 0 0028 0C38 14 24 4 24 4z"/>
+        <path d="M24 20l2.5 5 5.5.8-4 3.9.9 5.5L24 32.5l-4.9 2.7.9-5.5-4-3.9 5.5-.8z"/>
+      </svg>
+      <h3 class="service-name">Royal Wedding Planning</h3>
+      <p class="service-desc">End-to-end wedding management that transforms your dreams into a magnificent royal celebration. From venue selection to final farewell.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="6" y="14" width="36" height="28" rx="2"/>
+        <path d="M16 14V10a8 8 0 0116 0v4"/>
+        <circle cx="24" cy="28" r="4"/>
+        <path d="M24 32v6"/>
+      </svg>
+      <h3 class="service-name">Luxury Decoration</h3>
+      <p class="service-desc">Breathtaking floral artistry, draping, lighting design and themed décor that transforms any venue into a palace of dreams.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M8 40V20l16-12 16 12v20"/>
+        <rect x="18" y="28" width="12" height="12"/>
+        <path d="M14 28h4M30 28h4M14 20h4M30 20h4"/>
+      </svg>
+      <h3 class="service-name">Destination Weddings</h3>
+      <p class="service-desc">We curate extraordinary destination weddings across Rajasthan's majestic forts, palaces, and heritage havens.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">04</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="24" r="18"/>
+        <path d="M24 14v10l6 6"/>
+        <path d="M14 24h4M30 24h4M24 14v4M24 30v4"/>
+      </svg>
+      <h3 class="service-name">Mehendi & Sangeet</h3>
+      <p class="service-desc">Vibrant, culturally rich pre-wedding ceremonies with live entertainment, bespoke stage designs, and traditional elegance.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">05</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 36l8-8 8 8 8-8 8 8 8-8"/>
+        <path d="M12 28V16M20 28V12M28 28V18M36 28V8"/>
+      </svg>
+      <h3 class="service-name">Entertainment & Artists</h3>
+      <p class="service-desc">Curated live performances — folk artists, DJs, orchestras, celebrity performers, and fireworks to electrify your celebration.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-3">
+      <span class="service-num">06</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="24" cy="20" r="8"/>
+        <path d="M8 40c0-8.8 7.2-16 16-16s16 7.2 16 16"/>
+        <path d="M34 12l4 4M14 12l-4 4"/>
+      </svg>
+      <h3 class="service-name">Hospitality & Guest Care</h3>
+      <p class="service-desc">Premium hospitality management — from airport transfers to luxury accommodations, ensuring every guest feels royally treated.</p>
+      <span class="service-arrow">Discover More →</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <span class="section-label reveal">Our Portfolio</span>
+    <h2 class="section-title reveal reveal-delay-1">Moments We've <em>Crafted</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal">
+      <div class="gallery-inner"><img src="portfolio/01 gwc.jpeg" alt="Grand Wedding Ceremony"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Grand Wedding Ceremony</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-inner"><img src="portfolio/02 sn.jpeg" alt="Sangeet Night"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Sangeet Night</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-inner"><img src="portfolio/03 barat.jpeg" alt="Baraat Procession"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Baraat Procession</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-inner"><img src="portfolio/04 mandap.jpeg" alt="Mandap Decoration"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Mandap Decoration</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-inner"><img src="portfolio/05 haldi.jpeg" alt="Haldi Carnival"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Haldi Carnival</span></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3">
+      <div class="gallery-inner"><img src="portfolio/06 recpetion.jpeg" alt="Reception Gala"></div>
+      <div class="gallery-overlay"><span class="gallery-label">✦ Reception Gala</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <span class="section-label reveal">Love Stories</span>
+    <h2 class="section-title reveal reveal-delay-1">What Our Families <em>Say</em></h2>
+  </div>
+  <div class="testimonials-track">
+    <div class="testimonial-card reveal">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-text">Lalwani Brothers turned our wedding into an absolute fairytale. Every single detail was perfect — the flowers, the lighting, the coordination. Our guests are still talking about it months later!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RS</div>
+        <div>
+          <span class="author-name">Riya & Sahil Mehta</span>
+          <span class="author-event">Grand Wedding · Jaipur, 2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-1">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-text">We wanted a destination wedding at a palace and Lalwani Brothers made it happen beyond our dreams. Professional, creative, and they truly understand the meaning of luxury.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">PA</div>
+        <div>
+          <span class="author-name">Priya & Arjun Sharma</span>
+          <span class="author-event">Palace Wedding · Udaipur, 2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal reveal-delay-2">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-text">From the very first meeting, we knew we were in the right hands. The sangeet night was electrifying and our wedding day was nothing short of magical. Highly recommend!</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">NK</div>
+        <div>
+          <span class="author-name">Neha & Karan Gupta</span>
+          <span class="author-event">Royal Wedding · Jodhpur, 2023</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="team-header">
+    <span class="section-label reveal">The People Behind The Magic</span>
+    <h2 class="section-title reveal reveal-delay-1">Who <em>We Are</em></h2>
+  </div>
+  <div class="team-grid">
+
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="team/Nidhi.png" alt="Nidhi Maheshwari">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Nidhi Maheshwari</div>
+        <div class="team-role">Event Stylist</div>
+        <p class="team-quote">
+          "Our vision is to craft an aura so enchanting, it leaves an everlasting imprint on every heart it touches."
+          <span class="team-quote-attr">~ Event Stylist</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-photo">
+        <img src="team/Ashok Bhaiya.png" alt="Ashok Lalwani">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Ashok Lalwani</div>
+        <div class="team-role">Founder</div>
+        <p class="team-quote">
+          "Our clients are at the heart of everything we do — their satisfaction is our greatest pride."
+          <span class="team-quote-attr">~ Founder</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-photo">
+        <img src="team/Anil Bhaiya.png" alt="Anil Lalwani">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Anil Lalwani</div>
+        <div class="team-role">Co-Founder</div>
+        <p class="team-quote">
+          "Excellence is our signature — delivering the very best is what sets us apart."
+          <span class="team-quote-attr">~ Co-Founder</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div id="why">
+    <div>
+      <span class="section-label reveal">Why Choose Us</span>
+      <h2 class="section-title reveal reveal-delay-1">The <em>Lalwani</em><br>Difference</h2>
+      <div class="why-features">
+        <div class="why-feature reveal reveal-delay-1">
+          <span class="why-num">01</span>
+          <div class="why-content">
+            <h4>Legacy of Excellence</h4>
+            <p>Over 15 years and 500+ events have sharpened our craft to an art form. We don't just plan events — we architect memories.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal reveal-delay-2">
+          <span class="why-num">02</span>
+          <div class="why-content">
+            <h4>Bespoke Every Time</h4>
+            <p>No two weddings are alike. Each event is designed uniquely from the ground up, reflecting your personality and vision.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal reveal-delay-3">
+          <span class="why-num">03</span>
+          <div class="why-content">
+            <h4>Seamless Execution</h4>
+            <p>Our dedicated team ensures flawless coordination on your big day so you can be fully present in every precious moment.</p>
+          </div>
+        </div>
+        <div class="why-feature reveal reveal-delay-4">
+          <span class="why-num">04</span>
+          <div class="why-content">
+            <h4>Trusted Vendor Network</h4>
+            <p>Curated partnerships with Rajasthan's finest caterers, photographers, artists and vendors for unbeatable quality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual reveal reveal-delay-2">
+      <div class="diamond-grid">
+        <div class="diamond-cell"><span class="icon">💐</span><span>Floral Design</span></div>
+        <div class="diamond-cell"><span class="icon">✨</span><span>Lighting</span></div>
+        <div class="diamond-cell"><span class="icon">🎭</span><span>Entertainment</span></div>
+        <div class="diamond-cell"><span class="icon">🍽️</span><span>Fine Dining</span></div>
+        <div class="diamond-cell"><span class="icon">📸</span><span>Photography</span></div>
+        <div class="diamond-cell"><span class="icon">🚗</span><span>Logistics</span></div>
+        <div class="diamond-cell"><span class="icon">🎪</span><span>Venue Styling</span></div>
+        <div class="diamond-cell"><span class="icon">👑</span><span>Royal Décor</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <span class="section-label reveal">Get In Touch</span>
+    <h2 class="section-title reveal reveal-delay-1">Let's Create Your<br><em>Dream Wedding</em></h2>
+    <p class="reveal reveal-delay-2">Tell us about your vision and we'll craft something extraordinary together.</p>
+
+    <div class="contact-form reveal reveal-delay-3">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full Name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 00000 00000">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Event Type</label>
+        <select>
+          <option value="">Select Event</option>
+          <option>Grand Wedding</option>
+          <option>Destination Wedding</option>
+          <option>Sangeet / Mehendi</option>
+          <option>Reception</option>
+          <option>Engagement</option>
+          <option>Other Event</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Expected Date</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Expected Guests</label>
+        <select>
+          <option value="">Guest Count</option>
+          <option>50 – 100</option>
+          <option>100 – 300</option>
+          <option>300 – 500</option>
+          <option>500 – 1000</option>
+          <option>1000+</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Your Vision</label>
+        <textarea placeholder="Tell us about your dream event..."></textarea>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <a href="#" class="btn-primary" id="submitBtn" onclick="handleSubmit(event)"><span>Send Enquiry ✦</span></a>
+    </div>
+
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <span class="ci-label">📞 Call Us</span>
+        <a href="tel:+919784586143" class="ci-value">+91 97845 86143</a>
+      </div>
+      <div class="contact-item">
+        <span class="ci-label">✉ Email</span>
+        <a href="/cdn-cgi/l/email-protection#3677455e595d5a575a4157585f07000176515b575f5a1855595b" class="ci-value"><span class="__cf_email__" data-cfemail="9fdeecf7f0f4f3fef3e8fef1f6aea9a8dff8f2fef6f3b1fcf0f2">[email&#160;protected]</span></a>
+      </div>
+      <div class="contact-item">
+        <span class="ci-label">📍 Location</span>
+        <span class="ci-value">Bhilwara, Rajasthan</span>
+      </div>
+      <div class="contact-item">
+        <span class="ci-label">🕐 Hours</span>
+        <span class="ci-value">Mon – Sun, 9am – 9pm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="logo2.png" style="height: 46px; width: auto;" alt="Lalwani Brothers Logo">
+  <p>© 2025 Lalwani Brothers. All Rights Reserved. Crafted with ♥ in Rajasthan.</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Custom cursor (desktop only) ──
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  if (cursor && ring && window.matchMedia('(pointer: fine)').matches) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx - 6 + 'px';
+      cursor.style.top = my - 6 + 'px';
+    });
+    function animateRing() {
+      rx += (mx - rx - 18) * 0.12;
+      ry += (my - ry - 18) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+    document.querySelectorAll('a, button, .service-card, .testimonial-card, .gallery-item, .diamond-cell').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; ring.style.borderColor = '#E8C96A'; });
+      el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; ring.style.borderColor = '#C9A84C'; });
+    });
+  }
+
+  // ── Hamburger / Mobile Menu ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    hamburger.classList.toggle('open', menuOpen);
+    mobileMenu.classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  });
+
+  // Close on background tap
+  mobileMenu.addEventListener('click', e => {
+    if (e.target === mobileMenu) closeMobileMenu();
+  });
+
+  // ── Navbar scroll ──
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Reveal on scroll ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Counter animation ──
+  function animateCounters() {
+    document.querySelectorAll('.stat .n').forEach(el => {
+      const raw = el.textContent;
+      const target = parseInt(raw);
+      if (isNaN(target)) return;
+      const suffix = raw.replace(/[0-9]/g, '');
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = Math.floor(current) + suffix;
+      }, 25);
+    });
+  }
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObserver.disconnect(); } });
+  }, { threshold: 0.4 });
+  const statsEl = document.querySelector('.stats-row');
+  if (statsEl) statsObserver.observe(statsEl);
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<span>✓ Enquiry Sent — We\'ll Contact You Soon!</span>';
+    btn.style.background = 'linear-gradient(135deg, #2a6e2f, #3a8e40)';
+    setTimeout(() => {
+      btn.innerHTML = '<span>Send Enquiry ✦</span>';
+      btn.style.background = '';
+    }, 4000);
+  }
+
+  // ── Smooth scroll ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Gallery overlay on touch devices ──
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('touchstart', () => {
+        const overlay = item.querySelector('.gallery-overlay');
+        if (overlay) overlay.style.opacity = '1';
+      }, { passive: true });
+      item.addEventListener('touchend', () => {
+        setTimeout(() => {
+          const overlay = item.querySelector('.gallery-overlay');
+          if (overlay) overlay.style.opacity = '';
+        }, 1200);
+      }, { passive: true });
+    });
+  }
+</script>
+</body>
+</html>
